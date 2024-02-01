@@ -1,5 +1,3 @@
-/* The code you provided is a JavaScript code for a server-side application using the Express.js
-framework. Here's a breakdown of what the code does: */
 const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
@@ -26,14 +24,16 @@ app.use("/tasks", taskRoutes);
 app.use("/subtasks", subtaskRoutes);
 
 // Schedule a cron job to update task priorities
+// '0 * * * *': Run every hour at the 0th minute.
+// '*/5 * * * *': Run every 5 minutes.
+// '0 0 * * *': Run daily at midnight.
 cron.schedule("* * * * *", async () => {
   try {
-    // Your logic to update task priorities based on new criteria goes here
     const currentDate = new Date();
     const tasksToUpdate = await Task.find({ due_date: { $lt: currentDate } });
 
     tasksToUpdate.forEach(async (task) => {
-      // Calculate the difference in days between the due date and today
+      // Calculating the difference in days between the due date and today
       const dueDate = new Date(task.due_date);
       const timeDifference = dueDate.getTime() - currentDate.getTime();
       const daysDifference = Math.ceil(timeDifference / (1000 * 3600 * 24));
@@ -59,7 +59,7 @@ cron.schedule("* * * * *", async () => {
   }
 });
 
-// Schedule a cron job for voice calling using Twilio
+// Schedule a cron job for voice calling using Twilio;
 /* The `cron.schedule` function is used to schedule a cron job, which is a time-based job scheduler in
 Node.js. In this specific code snippet, the cron job is scheduled to run every day at 12:00 PM. */
 cron.schedule("0 12 * * *", async () => {
@@ -100,8 +100,7 @@ cron.schedule("0 12 * * *", async () => {
   }
 });
 
-/* The `app.listen(port, () => { ... })` code is responsible for starting the server and making it
-listen on a specific port. */
+//listening port:4000
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });

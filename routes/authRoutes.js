@@ -6,7 +6,6 @@ const verifyToken = require("../middlewares/verifyToken");
 
 const router = express.Router();
 
-// Move your /register and /login routes here
 const generateToken = (userId) => {
   return jwt.sign({ userId }, process.env.JWT_SECRET, { expiresIn: "10h" });
 };

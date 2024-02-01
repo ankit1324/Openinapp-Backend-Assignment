@@ -7,8 +7,6 @@ const verifyToken = require("../middlewares/verifyToken");
 const mongoose = require("mongoose");
 const router = express.Router();
 
-// Move your /tasks/:taskId/subtasks/:_id and /tasks/:taskId/subtasks/:_id routes here
-
 // Create SubTask endpoint✅
 router.post("/tasks/:taskId/subtasks", verifyToken, async (req, res) => {
   try {
@@ -25,9 +23,9 @@ router.post("/tasks/:taskId/subtasks", verifyToken, async (req, res) => {
     // Update task status based on subtasks
     await task.updateStatus();
 
-    // // Update the user's tasks array with the subtask's task ID
-    // const userId = req.userId;
-    // await User.findByIdAndUpdate(userId, { $addToSet: { tasks: task._id } });
+    // // Update the tasks array with the subtask's task ID
+    // const Task_Id = req.task_Id;
+    // await User.findByIdAndUpdate(task_Id, { $addToSet: { tasks: task._id } });
 
     res.status(201).json(subtask);
   } catch (err) {

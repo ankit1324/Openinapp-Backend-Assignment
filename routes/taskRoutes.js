@@ -7,8 +7,6 @@ const User = require("../models/User");
 const mongoose = require("mongoose");
 const router = express.Router();
 
-// Move your /tasks, /tasks/:taskId/subtasks, /tasks/:taskId, and /tasks/:taskId/subtasks/:_id routes here
-
 // Create Task endpoint ✅
 router.post("/settasks", verifyToken, async (req, res) => {
   try {
